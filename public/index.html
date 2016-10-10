@@ -5,10 +5,50 @@
 
     <title>R7 FrontEnd Test</title>
 
+    <link rel="stylesheet" href="stylesheets/reset.css" media="all">
     <link rel="stylesheet" href="stylesheets/style.css" media="all">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
   </head>
-  <body>
-      <!-- let's code :D -->
 
+  <body ng-app="MyApp">
+    <!-- let's code :D -->
+
+    <div class="container" ng-controller="FazendaCtrl">
+
+    	<div class="titulo">
+    		<img src="images/logo-a-fazenda.png">
+    		<h1>RANKING</h1>
+    	</div>
+
+		<ul class="rank">
+			<li class="rank-item" ng-repeat="ranking in rankings | orderBy:'-positive'">
+				<div class="box-foto">
+					<div class="foto">
+						<img src="{{ranking.picture}}" alt="Foto">
+					</div>
+					<p class="numero">{{$index+1}}</p>
+				</div>
+				<div class="pessoa">
+					<h3>{{ranking.name}}</h3>
+					<p>{{ranking.description}}</p>
+				</div>
+				<ul class="tooltip">
+					<img class="seta" src="images/seta.png">
+					<li class="gostam">
+						<h6>GOSTAM</h6>
+						<p>{{(ranking.positive / GetTotalPos()) * 100 | limitTo:4}}%</p>
+					</li>
+					<li class="nao-gostam">
+						<h6>NÃO GOSTAM</h6>
+						<p>{{(ranking.negative / GetTotalNeg()) * 100 | limitTo:4}}%</p>
+					</li>
+				</ul>
+			</li>
+
+		</ul>
+
+    </div> <!-- / container -->
+
+    <script src="javascripts/angular.min.js"></script> 
     <script src="javascripts/main.js"></script> 
 </html>
